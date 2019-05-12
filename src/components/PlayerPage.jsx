@@ -12,7 +12,7 @@ class PlayerPage extends React.Component {
       items: [],
       title: '',
       coverArt: '',
-      nowPlayingSrc: '',
+      nowPlayingItem: {}
     }
     this.nowPlayingHandler = this.nowPlayingHandler.bind(this);
   }
@@ -23,7 +23,7 @@ class PlayerPage extends React.Component {
     .then((res) => {
       this.setState({
         items: res.items,
-        nowPlayingSrc: res.items[0].enclosure.url,
+        nowPlayingItem: res.items[0],
         title: res.title,
         artworkUrl: res.itunes.image
       });
@@ -33,15 +33,15 @@ class PlayerPage extends React.Component {
     });
   }
 
-  nowPlayingHandler(src) {
-    this.setState({nowPlayingSrc: src});
+  nowPlayingHandler(item) {
+    this.setState({nowPlayingItem: item});
   }
 
   render() {
     return (
       <div>
         {this.state.errorMessage}
-        <Player title={this.state.title} artworkUrl={this.state.artworkUrl} nowPlayingSrc={this.state.nowPlayingSrc}/>        
+        <Player title={this.state.title} artworkUrl={this.state.artworkUrl} nowPlayingItem={this.state.nowPlayingItem}/>        
         <List items={this.state.items} nowPlayingHandler={this.nowPlayingHandler}/>
       </div>
     )

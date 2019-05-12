@@ -6,36 +6,33 @@ class PlayerAudio extends React.Component {
   constructor(props){
     super(props);        
     this.state = {      
-      nowPlayingSrc: props.nowPlayingSrc,
+      nowPlayingItem: {},
       type: 'audio/mp3',
-      title: 'Hello',
       player: {}
     }
   }
 
   componentDidMount() {
     const player = new Plyr(document.getElementById('audio-player'));
-    this.setState({player: player});
+    this.setState({player: player, nowPlayingItem: this.props.nowPlayingItem});
   }
   
   componentDidUpdate(prevProps) {
-    if(this.props.nowPlayingSrc !== prevProps.nowPlayingSrc) {
-      this.setState({nowPlayingSrc: this.props.nowPlayingSrc}, () => {
+    if(this.props.nowPlayingItem.title !== prevProps.nowPlayingItem.title) {
+      this.setState({nowPlayingItem: this.props.nowPlayingItem}, () => {
         let source = {
           type: 'audio',
-          title: this.state.title,
+          title: this.state.nowPlayingItem.title,
           sources: [
             {
-              src: this.state.nowPlayingSrc,
+              src: this.state.nowPlayingItem.enclosure.url,
               type: this.state.type
             }
           ]
         }
         let player = this.state.player;
         player.source = source;
-        this.setState({player: player}, () =>{
-          this.state.player.play();
-        });
+        player.play();
       });      
     }
   }
@@ -43,6 +40,7 @@ class PlayerAudio extends React.Component {
   render() {
     return (
       <div>
+        <p>{this.state.nowPlayingItem.title}</p> 
         <audio id="audio-player" controls></audio>        
       </div>
     )

@@ -5,8 +5,8 @@ const Player = (props) => (
     <div className="player">
       <h4>{props.title}</h4>
       <img className="card-img-top" src={props.artworkUrl} alt={props.title} />
-      <div>        
-        <PlayerAudio nowPlayingSrc={props.nowPlayingSrc}/>
+      <div>
+        <PlayerAudio nowPlayingItem={props.nowPlayingItem}/>
       </div>
     </div>
   )

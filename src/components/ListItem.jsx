@@ -6,7 +6,8 @@ class ListItem extends React.Component {
     this.state = {
       title: '',
       pubDate: '',
-      src: ''
+      src: '',
+      item: {}
     }
     this.clickHandler = this.clickHandler.bind(this);
   }
@@ -15,12 +16,13 @@ class ListItem extends React.Component {
     this.setState({
       title: this.props.item.title, 
       pubDate: this.props.item.pubDate,
-      src: this.props.item.enclosure.url
+      src: this.props.item.enclosure.url,
+      item: this.props.item
     });    
   }
 
   clickHandler(e) {
-    this.props.nowPlayingHandler(this.state.src);
+    this.props.nowPlayingHandler(this.state.item);
   }
 
   render() {
