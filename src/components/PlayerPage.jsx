@@ -12,6 +12,7 @@ class PlayerPage extends React.Component {
       items: [],
       title: '',
       coverArt: '',
+      playing: false,
       nowPlayingItem: {}
     }
     this.nowPlayingHandler = this.nowPlayingHandler.bind(this);
@@ -34,14 +35,18 @@ class PlayerPage extends React.Component {
   }
 
   nowPlayingHandler(item) {
-    this.setState({nowPlayingItem: item});
+    this.setState({nowPlayingItem: item, playing: true});
   }
 
   render() {
     return (
       <div>
         {this.state.errorMessage}
-        <Player title={this.state.title} artworkUrl={this.state.artworkUrl} nowPlayingItem={this.state.nowPlayingItem}/>        
+        <Player 
+          title={this.state.title} 
+          artworkUrl={this.state.artworkUrl}
+          playing={this.state.playing}
+          nowPlayingItem={this.state.nowPlayingItem}/>        
         <List items={this.state.items} nowPlayingHandler={this.nowPlayingHandler}/>
       </div>
     )
