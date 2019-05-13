@@ -7,7 +7,7 @@ class PlayerPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      feedUrl: "https://justcast.herokuapp.com/shows/jia-chen-chinaconscience/audioposts.rss",
+      feedUrl: "",
       errorMessage: "",
       items: [],
       title: '',
@@ -16,9 +16,22 @@ class PlayerPage extends React.Component {
       nowPlayingItem: {}
     }
     this.nowPlayingHandler = this.nowPlayingHandler.bind(this);
+    this.parseData = this.parseData.bind(this);
   }
 
   componentDidMount() {
+    const parsedUrl = new URL(window.location.href);    
+    const feedUrl = parsedUrl.searchParams.get('id');
+    this.setState({feedUrl: feedUrl}, () => {
+      this.parseData();
+    })
+  }
+
+  nowPlayingHandler(item) {
+    this.setState({nowPlayingItem: item, playing: true});
+  }
+
+  parseData(){
     const parser = new Parser();
     parser.parseURL(this.state.feedUrl)
     .then((res) => {
@@ -31,11 +44,7 @@ class PlayerPage extends React.Component {
     })
     .catch((err) => {
       this.setState({errorMessage: "Can't fetch any from the page"})
-    });
-  }
-
-  nowPlayingHandler(item) {
-    this.setState({nowPlayingItem: item, playing: true});
+    });    
   }
 
   render() {
