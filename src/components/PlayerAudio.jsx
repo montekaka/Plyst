@@ -44,7 +44,7 @@ class PlayerAudio extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.nowPlayingItem.title}</p> 
+        <p>Now playing: {this.state.nowPlayingItem.title}</p> 
         <audio id="audio-player" controls></audio>        
       </div>
     )

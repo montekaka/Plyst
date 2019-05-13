@@ -27,22 +27,10 @@ class ListItem extends React.Component {
 
   render() {
     return (
-      <div className="list-item">
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onClick={this.clickHandler}>
-              <td>{this.state.title}</td>
-              <td>{this.state.pubDate}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <li className="list-group-item" onClick={this.clickHandler}>
+        <p>{this.state.title}</p>
+        <p>{this.state.pubDate}</p>        
+      </li>
     )
   }   
 }

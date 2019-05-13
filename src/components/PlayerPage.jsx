@@ -41,13 +41,15 @@ class PlayerPage extends React.Component {
   render() {
     return (
       <div>
-        {this.state.errorMessage}
-        <Player 
+        {this.state.errorMessage}        
+        <Player         
           title={this.state.title} 
           artworkUrl={this.state.artworkUrl}
           playing={this.state.playing}
           nowPlayingItem={this.state.nowPlayingItem}/>        
-        <List items={this.state.items} nowPlayingHandler={this.nowPlayingHandler}/>
+        <List
+          items={this.state.items}
+          nowPlayingHandler={this.nowPlayingHandler}/>
       </div>
     )
   }
